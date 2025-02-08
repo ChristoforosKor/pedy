@@ -1,0 +1,10 @@
+<form>
+
+	<fields>
+            <fieldset>
+               <field name="PersonelId" class="form-control" label="Προσωπικό" description="Επιλεξτε το προσωπικό για το οποίο καταχωρείται την αδεια" type="SQLParam" query="select s.* from (select {p1}) parm , pedy.vw_lstPersonelByUser s;" key_field="PersonelId" value_field="LastName" required="true" />
+                <field name="StartDate" label="Έναρξη"  type="calendar" class="calendar-form-control" description=" Επιλέξτε ημερομηνία έναρξης της άδειας" required="true" />
+		<field name="EndDate"  label="Λήξη" type="calendar" class="calendar-form-control" description=" Επιλέξτε την τελευταια ημερομηνία που έχει άδεια ο υπάλληλος" required="true" />
+            </fieldset>
+	</fields>
+</form>

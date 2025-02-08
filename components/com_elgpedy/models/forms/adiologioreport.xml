@@ -1,0 +1,13 @@
+<form>
+
+	<fields>
+            <fieldset>
+                <field name="PersonelId" class="form-control" label="Προσωπικό" description="Επιλεξτε το προσωπικό για το οποίο καταχωρείται την αδεια" type="text" key_field="PersonelId" value_field="LastName"  >
+                    <option value="">COM_ELG_SELECT</option>
+                </field>
+                <field format="%d/%m/%Y" name="StartDate" label="Έναρξη"  type="calendar" class="calendar-form-control" description=" Επιλέξτε ημερομηνία έναρξης της άδειας" required="true" />
+		<field format="%d/%m/%Y" name="EndDate"  label="Λήξη" type="calendar" class="calendar-form-control" description=" Επιλέξτε την τελευταια ημερομηνία που έχει άδεια ο υπάλληλος" required="true" />
+              
+            </fieldset>
+	</fields>
+</form>

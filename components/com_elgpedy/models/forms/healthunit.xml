@@ -1,0 +1,42 @@
+<form>
+
+	<fields>
+		<fieldset name="healthunit_organic">
+			<field name="HealthUnitId" type="hidden" />                
+            <field name="HealthUnitTypeId" type="hidden" />
+			<!--field
+				name="HealthUnitTypeId"
+				type="SQLRemote"
+				label="COM_ELG_PEDY_UNIT_TYPE" 
+				query="select HealthUnitTypeId as value, DescEL as HealthUnitTypeId from HealthUnitType order by DescEL" 
+				
+				required="true"
+				class="form-control"
+			>
+			   <option value="">COM_ELG_SELECT</option>
+			</field -->
+			<field name="DescEL" readonly="true" type="text" required="true" label="COM_ELGPEDY_HEALTH_UNIT" class="form-control" />
+			<field name="DescShortEL" type="hidden" label="COM_ELGPEDY_HEALTH_UNIT_SHORT" class="form-control" />
+			<field
+				name="IsActive"
+				type="List"
+				label="COM_ELGPEDY_IS_ACTIVE" 
+				required="true"
+				class="form-control"
+			>
+			   <option value="">COM_ELG_SELECT</option>
+			   <option value="1">JYES</option>
+			   <option value="0">JNO</option>
+			</field> 
+            <field name="Personel" type="hidden" required="true" label="COM_ELGPEDY_ORGANIG_POSITIONS" class="form-control" />
+		</fieldset>
+		<fieldset name="healthunit_address" >
+			<field name="Address" type="text" required="true" label="COM_ELGPEDY_ADDRESS" class="form-control" /> 
+			<field name="PostalCode" type="text" required="true" label="COM_ELGPEDY_POSTAL_CODE" class="form-control" /> 
+			<field name="Phone" type="tel" required="true" label="COM_ELGPEDY_PHONE" class="form-control" />		
+			<field name="Fax" type="tel" required="true" label="COM_ELGPEDY_FAX" class="form-control" />
+			<field name="Email" type="email" required="true" label="COM_ELGPEDY_EMAIL" class="form-control" />
+			
+		</fieldset>
+	</fields>
+</form>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<extension method="upgrade" type="component" version="3.8">
+	<name>com_elpedy</name>
+	<creationDate>2017-12-21</creationDate>
+	<author>E-Logism, Dextera</author>
+	<authorEmail>info@e-logism.gr</authorEmail>
+	<authorUrl>http://www.e-logism.gr, www.dexteraconsulting.com</authorUrl>
+	<copyright>Copyright (C) 2017 e-logism.gr</copyright>
+	<license>E-logism - Dextera propriatery licence</license>
+		<version>1.0.0</version>
+		<description>COM_EL_PEDY_DESCRIPTION</description>
+		<update>
+			<schemas>
+				<schemapath type="mysql">sql/updates/mysql</schemapath>
+			</schemas>
+		</update>
+		<media destination="com_elergon" folder="media">
+			<filename>index.html</filename>
+			<folder>css</folder>
+			<folder>js</folder>
+			<folder>images</folder>
+		</media>
+		<administration> 
+			<menu link="option=com_elergon" img="">COM_EL_EPEDY</menu>
+			<files folder="admin">
+				<folder>controllers</folder>
+				<folder>language</folder>
+				<folder>layouts</folder>
+				<folder>models</folder>
+				<folder>sql</folder>
+				<folder>views</folder>
+				<filename>access.xml</filename>
+				<filename>changelog.txt</filename>
+				<filename>config.xml</filename>
+				<filename>elpedy.php</filename>
+				<filename>index.html</filename>
+			</files>
+		</administration>
+		<files folder="site">
+			<folder>controllers</folder>
+			<folder>language</folder>
+			<folder>layouts</folder>
+			<folder>models</folder>
+			<folder>views</folder>
+			<filename>elpedy.php</filename>
+			<filename>index.html</filename>
+		</files>
+</extension>

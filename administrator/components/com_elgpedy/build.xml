@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>   
+   
+    <property name="prefix" value="com" />
+    <property name="extname" value="elgpedy" />
+	<property name="srcadmin" value="c:\xampp\htdocs\dextera\pedy\administrator\components\${prefix}_${extname}" />
+	<property name="srcsite"  value="c:\xampp\htdocs\dextera\pedy\components\${prefix}_${extname}" />
+	<property name="srcmedia" value="c:\xampp\htdocs\dextera\pedy\media\${prefix}_${extname}" />
+	<property name="destparent" value="c:\Users\ΓΙΑΝΝΗΣ\Documents\christoforos\${prefix}_${extname}" />
+										
+    <property name="extnameCamel" value="ElgPedy" />
+    <property name="langPref" value="COM_ELG_PEDY" />
+    <property name="version" value="1.2" />
+    <property name="createDate" value="2014-08-28" />
+    <property name="versiondir" value="${destparent}/${prefix}_${extname}_${version}" />
+    <property name="destadmin" value="${versiondir}/admin" />
+	<property name="destsite" value="${versiondir}/site" />
+	<property name="destmedia" value="${versiondir}/media" />
+    
+	<target name="deleteold">
+		<delete dir="${versiondir}"/>
+	</target>
+	
+    <target name="admin2dest">
+        <mkdir dir="${destadmin}" />
+        <copy todir="${destadmin}" >  
+            <fileset dir="${srcadmin}" includes="**"/>  
+        </copy>
+    </target>
+    <target name="renameadmin" >
+        <move todir="${destadmin}" includeemptydirs="false">
+            <fileset dir="${destadmin}"></fileset>
+            <mapper type="glob" from="elgcomponent.php" to="${extname}.php"/>
+        </move>
+        <move todir="${destadmin}/controllers" includeemptydirs="false">
+            <fileset dir="${destadmin}/controllers"></fileset>
+            <mapper type="glob" from="elgcomponent.php" to="${extname}.php"/>
+        </move>
+        <move todir="${destadmin}/language/el-GR" includeemptydirs="false">
+            <fileset dir="${destadmin}/language/el-GR"></fileset>
+            <mapper type="glob" from="el-GR.com_elgcomponent.*" to="el-GR.${prefix}_${extname}.*"/>
+        </move>
+        <move todir="${destadmin}/language/en-GB" includeemptydirs="false">
+            <fileset dir="${destadmin}/language/en-GB"></fileset>
+            <mapper type="glob" from="en-GB.com_elgcomponent.*" to="en-GB.${prefix}_${extname}.*"/>
+        </move>
+        <move todir="${destadmin}/layouts" includeemptydirs="false">
+            <fileset dir="${destadmin}/layouts"></fileset>
+            <mapper type="glob" from="elgcomponent.php" to="${extname}.php"/>
+        </move>
+        <move todir="${destadmin}/models" includeemptydirs="false">
+            <fileset dir="${destadmin}/models"></fileset>
+            <mapper type="glob" from="elgcomponent.php" to="${extname}.php"/>
+        </move>
+        <move todir="${destadmin}/views" includeemptydirs="false" >
+            <fileset dir="${destadmin}/views"  includes="**/*"></fileset>
+            <mapper type="glob" from="elgcomponent.php" to="${extname}.php"/>
+        </move>
+    </target>
+    <target name="replaceadmin">
+        <replace dir="${destadmin}/controllers"   token="ElgComponent" value="${extnameCamel}" >
+            <include name="**/*.php" />
+        </replace>
+        <replace dir="${destadmin}/language"   token="COM_ELGCOMPONENT" value="${langPref}" encoding="UTF-8">
+            <include name="**/*.ini" />
+        </replace>
+        <replace dir="${destadmin}/layouts"   token="COM_ELGCOMPONENT" value="${langPref}">
+            <include name="**/*.php" />
+        </replace>
+        <replace dir="${destadmin}/models"  token="ElgComponent" value="${extnameCamel}">
+            <include name="**/*.php" />
+        </replace>
+        <replace dir="${destadmin}/views"  token="ElgComponent" value="${extnameCamel}">
+            <include name="**/*.php" />
+        </replace>
+        <replace file="${destadmin}/access.xml"  token="elgcomponent" value="${extname}"></replace>
+        <replace file="${destadmin}/config.xml"  token="elgcomponent" value="${extname}"></replace>
+        <replace file="${destadmin}/manifest.xml" >
+            <replacefilter token="COM_ELGCOMPONENT" value="${langPref}"/>
+            <replacefilter token="elgcomponent" value="${extname}"/>
+        </replace>    
+		
+    </target>
+	
+	<target name="site2dest">
+        <mkdir dir="${destsite}" />
+        <copy todir="${destsite}" >  
+            <fileset dir="${srcsite}" includes="**"/>  
+        </copy>
+    </target>
+    <target name="renamesite" >
+        <move todir="${destsite}" includeemptydirs="false">
+            <fileset dir="${destsite}"></fileset>
+            <mapper type="glob" from="elgcomponent.php" to="${extname}.php"/>
+        </move>
+        <move todir="${destsite}/controllers" includeemptydirs="false">
+            <fileset dir="${destsite}/controllers"></fileset>
+            <mapper type="glob" from="elgcomponent.php" to="${extname}.php"/>
+        </move>
+        <move todir="${destsite}/language/el-GR" includeemptydirs="false">
+            <fileset dir="${destsite}/language/el-GR"></fileset>
+            <mapper type="glob" from="el-GR.com_elgcomponent.*" to="el-GR.${prefix}_${extname}.*"/>
+        </move>
+        <move todir="${destsite}/language/en-GB" includeemptydirs="false">
+            <fileset dir="${destsite}/language/en-GB"></fileset>
+            <mapper type="glob" from="en-GB.com_elgcomponent.*" to="en-GB.${prefix}_${extname}.*"/>
+        </move>
+        <move todir="${destsite}/layouts" includeemptydirs="false">
+            <fileset dir="${destsite}/layouts"></fileset>
+            <mapper type="glob" from="elgcomponent.php" to="${extname}.php"/>
+        </move>
+        <move todir="${destsite}/models" includeemptydirs="false">
+            <fileset dir="${destsite}/models"></fileset>
+            <mapper type="glob" from="elgcomponent.php" to="${extname}.php"/>
+        </move>
+        <move todir="${destsite}/views" includeemptydirs="false" >
+            <fileset dir="${destsite}/views"  includes="**/*"></fileset>
+            <mapper type="glob" from="elgcomponent.php" to="${extname}.php"/>
+        </move>
+    </target>
+	
+    <target name="replacesite">
+        <replace dir="${destsite}/controllers" token="ElgComponent" value="${extnameCamel}" >
+            <include name="**/*.php" />
+        </replace>
+        <replace dir="${destsite}/language" token="COM_ELGCOMPONENT" value="${langPref}" encoding="UTF-8">
+            <include name="**/*.ini" />
+        </replace>
+        <replace dir="${destsite}/layouts" token="COM_ELGCOMPONENT" value="${langPref}">
+            <include name="**/*.php" />
+        </replace>
+        <replace dir="${destsite}/models" token="ElgComponent" value="${extnameCamel}">
+            <include name="**/*.php" />
+        </replace>
+        <replace dir="${destsite}/views"  token="ElgComponent" value="${extnameCamel}">
+            <include name="**/*.php" />
+        </replace>        
+    </target>
+	
+    <target name="media2dest">
+        <mkdir dir="${destmedia}" />
+        <copy todir="${destmedia}" >  
+            <fileset dir="${srcmedia}" includes="**"/>  
+        </copy>
+    </target>
+	
+	<target name="finalize">
+		<move tofile="${versiondir}/manifest.xml" file="${destadmin}/manifest.xml" />
+		<zip basedir="${versiondir}" destfile="${versiondir}/${prefix}_${extname}_${version}.zip" />
+	</target>
+    <target name="_buildextension" depends="deleteold, admin2dest, renameadmin, replaceadmin, site2dest, renamesite, replacesite, media2dest, finalize"></target>
+</project>

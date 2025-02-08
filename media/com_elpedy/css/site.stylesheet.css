@@ -1,0 +1,42 @@
+.calendar-form-control {  
+    width:80%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+/*div.calendar table {width:100%}*/
+
+.el-busy{text-align:center; background-image: url('../images/loader_128.gif');height:128px; background-position: center center; background-repeat: no-repeat; display:none}
+#vaccinesListToolbar label{display:block}
+#vaccinesListToolbar .buttons{padding-top: 15px}
+
+.vaccines-table tbody a.btn, .vaccines-table tbody button.btn {
+    margin: 2px;
+    
+} 
+
+.vaccines-table tbody button.btn {
+    width: 109px;
+}
+
+.covid-vaccine table.covidVaccineTable td.editable:hover {
+	background-color:#e6e6e6;
+}
+
+.covid-vaccine table.covidVaccineTable td.sum {
+	font-weight: bold;
+	background-color:#e6eeff;
+	border:3px ridge Silver;
+}

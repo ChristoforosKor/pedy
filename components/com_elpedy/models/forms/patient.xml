@@ -1,0 +1,31 @@
+<form>
+    <fields>
+        <fieldset>
+            <field type="hidden" name="vaccine_patient_id" />
+                <field type="text" name="area_id" required="true" label="Περιοχή" />
+            <field type="text" name="area_type_id" required="true" label="Είδος περιοχής" />
+            
+             <field type="text" name="school_level_id" required="true" class="has-options"  label="Εκπαιδευτική Βαθμίδα" />
+            <field type="text" name="school_id" required="true" class="has-options"  label="Σχολείο" />
+            <field type="text" name="school_class_id" required="true" class="has-options" label="Τάξη" />
+            <field type="calendar" name="birthday" required="true" label="Ημερομηνία Γέννησης"  format="%d/%m/%Y" />
+            <field type="text" name="age" required="true" label="Ηλικία" />
+            <field type="sqlRemote" name="nationality_id"  label="Εθνικότητα" 
+                            query="select ct.idCountry, ct.country from country c inner join country_translation ct on c.id = ct.idCountry where ct.language='el-GR' and c.enabled ='Y' order by c.ordering, ct.country"
+                             key_field="idCountry"
+                             value_field="country"
+            >
+                <option value="">COM_EL_SELECT</option>
+            </field>
+            <field type="text" name="father_profession"  label="Επάγγελμα πατέρα" />
+            <field type="text" name="mother_profession"  label="Επάγγελμα μητέρας" />
+            
+            <field type="radio" name="isMale" required="true" >
+                <option value="1">ΑΡΡΕΝ</option>
+                <option value="0">ΘΗΛΥ</option>
+            </field>
+            
+            
+        </fieldset>
+    </fields>
+</form>

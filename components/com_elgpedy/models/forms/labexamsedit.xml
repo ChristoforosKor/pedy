@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields>
+        <field name="idUser" type="hidden" />
+        <field name="idUnit" type="sql" query="select 0 as idUnit,'sample' as value" key_field="idUnit" value_field="value" required="true" >
+            <option value=""></option>
+        </field>
+        <field name="month" type="list">
+            <option value="1">JANUARY</option>
+            <option value="2">FEBRUARY</option>
+        </field>
+        <field name="blood" type="text" required="required"  label="Αιματολογικές εξετάσεις" />  
+        <field name="lib" type="radio" required="required"  >    <option value="0">JNO</option>    <option value="1">JYES</option></field> 
+    <field name="isGradePlacedOk" type="radio" required="required"  >    <option value="0">JNO</option>    <option value="1">JYES</option></field> 
+    <field name="isGutterCollectorOk" type="radio" required="required"  >    <option value="0">JNO</option>    <option value="1">JYES</option></field> 
+    <field name="idSupportType" type="sql" query="select id as value, supportType as idSupportType from #__elg_ergon_guttersupporttypes" required="required"  >
+        <option value="">COM_ELG_SELECT</option>
+    </field>
+    <field name="idSupportDistance" type="sql" query="select id as value, supportDistance as idSupportDistance from #__elg_ergon_supportdistance" required="required"  >
+        <option value="" >COM_ELG_SELECT</option>
+    </field>
+    <field name="tileGutterDistance" type="text" required="required"  />
+    <field name="isNotGradeInformed" type="radio" required="required"  >    <option value="0">JNO</option>    <option value="1">JYES</option></field> 
+    <field name="isGutterChecked" type="radio" required="required"  >    <option value="0">JNO</option>    <option value="1">JYES</option></field> 
+    <field name="isGutterCheckedOnCustomer" type="radio" required="required"  >    <option value="0">JNO</option>    <option value="1">JYES</option></field> 
+    <field name="isOpticalImageOk" type="radio" required="required"  >    <option value="0">JNO</option>    <option value="1">JYES</option></field> 
+    <field name="isSignPlacedOk" type="radio" required="required"  >
+        <option value="0">JNO</option>
+        <option value="1">JYES</option>
+    </field> 
+    <field name="idGarbagePlace" type="sql" query="select id as value, garbagePlace as idGarbagePlace from #__elg_ergon_garbageplace"  required="required" >
+        <option value="">COM_ELG_SELECT</option>
+    </field>
+    <field
+                name="afComments"
+                label="COM_ELGERGON_STATE_COMMENTS"
+                description="COM_ELGERGON_STATE_COMMENTS_APPLICATION_EDIT_DESC"
+                type="textarea"
+                rows="10"
+               
+            />
+    </fields>
+</form>

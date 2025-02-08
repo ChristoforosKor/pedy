@@ -1,0 +1,107 @@
+<form>
+  
+      
+            
+            <field type="hidden" name="id" />
+            <field type="hidden" name="id_covidattendancy_details" />
+         
+            <field name="id_health_unit" 
+                   type="UserUnitExact"
+                   label="Μονάδα"
+                   required="true"
+                
+                   class="form-control"
+            />
+            
+            <field type="calendar" name="ref_date" required="true" label="Ημερομηνία"  format="%d/%m/%Y"   class="form-control calendar-form-control" />
+                  
+            <field type="text" name="personnel_doctors" required="true" label="Ιατρικό Προσωπικό"   class="form-control" />
+            <field type="text" name="personnel_nurses" required="true" label="Νοσηλευτικό Προσωπικό"    class="form-control"/>
+            <field type="text" name="personnel_office" required="true"  label="Διοικητικό Προσωπικό"   class="form-control" />
+            <field type="text" name="personnel_labs" required="true" label="Εργαστηριακό Προσωπικό"    class="form-control"/>
+            <field type="text" name="personnel_cleaning" required="true" label="Προσωπικό Καθαριότητας"     class="form-control" /> 
+            <field type="text" name="personnel_guard" required="true" label="Προσωπικό Φύλαξης"   class="form-control" />
+            
+            <field type="text" name="summ" readonly="true" label="Α"   class="form-control" />
+            <field type="text" name="sumf" readonly="true" label="Γ"   class="form-control" />            
+            <field type="text" name="suspm" readonly="true" label="Α"   class="form-control" />
+            <field type="text" name="suspf" readonly="true" label="Γ"   class="form-control" />
+                     
+         
+          
+            
+            <field name="id_gender" 
+                   type="SQLRemote"
+                   label="ΦΥΛΟ"
+                   required="true"
+                   query="select id as value, gender as id_gender from Gender order by value"
+                   class="form-control"
+            >
+                <option>COM_EL_SELECT</option>
+            </field>
+            
+			
+			
+            <field type="integer" name="age"   label="Ηλικία"   first="1" last="110" step="1"  class="form-control"  required="true"  />  
+            
+           <!-- field type="text" name="nationality"   label="Υπηκοότητα"   class="form-control"  required="true"  / -->
+           
+           <field type="SQLRemote" name="residence"   
+					label="Τόπος Κατοικίας"   
+					class="form-control"  
+					required="true"  
+					query="select MunicipalityId as value, DescEl as residence from Municipality order by residence"
+			/>
+              
+            <field name="id_attendancy_medium" 
+                   type="SQLRemote"
+                   label="Τρόπος προσέλευσης"
+                   required="true"
+                   query="select id as value, attendancy_medium as id_attendancy_medium from CovidAttendancyMedium order by value"
+                   class="form-control"
+            >
+                <option>COM_EL_SELECT</option>
+            </field>
+             <field type="sqlRemote" name="id_nationality"  label="Εθνικότητα"   class="form-control"
+                            query="select ct.idCountry, ct.country from country c inner join country_translation ct on c.id = ct.idCountry where ct.language='el-GR' and c.enabled ='Y' order by c.ordering, ct.country"
+                             key_field="idCountry"
+                             value_field="country"
+							 required="true"
+            >
+                
+            </field>
+            <field name="id_treatment" 
+                   type="SQLRemote"
+                   label="Οδηγίες/Κατ'οίκον περιορισμός"
+                   required="true"
+                   query="select id as value, yesno as id_treatment from yesno order by value"
+                  class="form-control"
+            >
+                <option>COM_EL_SELECT</option>
+            </field>
+            
+           <field name="id_action" 
+                   type="SQLRemote"
+                   label="Λήψη επιχρίσματος"
+                   required="true"
+                   query="select id as value, yesno as id_action from yesno order by value"
+                   class="form-control"
+            >
+                <option>COM_EL_SELECT</option>
+            </field> 
+               
+            <field type="SQLRemote"
+					name="hospital_prompt"   
+					label="Παραπομπή σε Νοσοκομείο"   
+					class="form-control"  
+					required="true"  
+					query="select HealthUnitId as value, DescEl as hospital_prompt from HealthUnit where HealthUnitId between 1 and 24 order by value"
+			 >
+                <option>COM_EL_SELECT</option>
+				<option value="-1" >OXI</option>
+                <option value="-2" >ΑΓΝΩΣΤΟ</option>
+            </field>  
+                 
+            
+  
+</form>

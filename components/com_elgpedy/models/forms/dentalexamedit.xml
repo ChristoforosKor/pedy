@@ -1,0 +1,48 @@
+<form>
+    <fields>
+        <fieldset>
+            <field type="hidden" name="dental_transaction_id" />
+            <!-- field name="exam_date" type="calendar" label="Ημερομηνία" format="%d/%m/%Y" / -->
+            <field type="text" name="school_level_id" required="true" class="has-options"  label="Εκπαιδευτική Βαθμίδα" />
+            <field type="text" name="school_id" required="true" class="has-options"  label="Σχολείο" />
+            <field type="text" name="school_class_id" required="true" class="has-options" label="Τάξη" />
+            <field type="text" name="area" required="true" label="Περιοχή" />
+            <field type="text" name="area_type_id" required="true" label="Είδος περιοχής" />
+            <field type="text" name="ssn" required="true" label="AMKA" />
+            <field type="sqlRemote" name="info_level" required="true" label="Βασικό Επίπεδο Ενημέρωσης" 
+				query="select * from Info_level"
+				key_field="InfolevelId"
+				value_field="Info_level"
+			/>	
+            <field type="text" name="birthday" required="true" label="Ημερομηνία Γέννησης" class="form-control" readonly="true" />
+            <field type="text" name="age" required="true" label="Ηλικία" />
+            <field type="sqlRemote" name="nationality_id"  label="Εθνικότητα" 
+            query="select ct.idCountry, ct.country from country c inner join country_translation ct on c.id = ct.idCountry where ct.language='el-GR' and c.enabled ='Y' order by c.ordering, ct.country"
+            key_field="idCountry"
+            value_field="country"
+            />
+            <field type="text" name="father_profession"  label="Επάγγελμα πατέρα" />
+            <field type="text" name="mother_profession"  label="Επάγγελμα μητέρας" />
+            <field type="checkboxes" name="dental_mouthcondition">
+                <option value="1">Υποπλασία αδαμαντίνης</option>            
+                <option value="3">Μηχανικές βλάβες - Τραύματα δοντιών</option>
+                <option value="4">Σταυροειδής σύγκλειση</option>
+                <option value="5">Χασμοδοντία</option>
+                <option value="6">Σκελετική ανωμαλία (Τάξη ΙΙ και ΙΙΙ)</option>
+                <option value="7">Φλεγμονή Ούλων (ουλίτιδα)</option>
+            </field>
+            <!--- field type="SQLCheckboxes" name="dental_mouthcondition2" 
+                   query="select dental_mouthcondition_id, description from dental_mouthcondition" 
+                   key_field="dental_mouth_conditin_id" 
+                   value_field="description" / -->
+            <field type="radio" name="isMale" required="true" >
+                <option value="1">ΑΡΡΕΝ</option>
+                <option value="0">ΘΥΛΗ</option>
+            </field>
+            
+            <field type="SQLRadio" class="radio-list"  key_field="dental_mouthcondition_id" value_field="description" name="problem_category_2"  label="Κατάσταση περιοδοντίου (CPITN)" query="select dental_mouthcondition_id, description from #__dental_mouthcondition where problem_category_id = 2 and locale='el' " />
+            <field type="SQLRadio" class="radio-list" key_field="dental_mouthcondition_id" value_field="description" name="problem_category_3"  label="Οδοντογναθικές ανωμαλίες" query="select dental_mouthcondition_id, description from #__dental_mouthcondition where problem_category_id = 3 and locale='el' " />
+            <field type="SQLRadio" class="radio-list" key_field="dental_mouthcondition_id" value_field="description" name="problem_category_4"  label="Στοματικός βλεννογόνος" query="select dental_mouthcondition_id, description from #__dental_mouthcondition where problem_category_id = 4 and locale='el' " />
+        </fieldset>
+    </fields>
+</form>

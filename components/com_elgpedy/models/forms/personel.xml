@@ -1,0 +1,108 @@
+<form>
+
+	<fields>
+            <fieldset name="personel_personal">
+				<field name="PersonelId" type="hidden" />
+                                <field name="StatusId" type="hidden" />
+                   
+				<field name="LastName" type="text" required="true" label="COM_ELGPEDY_LASTNAME" class="form-control" />
+				<field name="FirstName" type="text" required="true" label="COM_ELGPEDY_FIRSTNAME" class="form-control" />
+				<field name="FatherName" type="text" required="true" label="COM_ELGPEDY_FATHERNAME" class="form-control" />
+				<field name="trn" type="text" required="true" label="COM_ELGPEDY_TRN" class="form-control" />
+				<field name="amka" type="text" required="true" label="COM_ELGPEDY_AMKA" class="form-control" />
+			</fieldset>
+			<fieldset name="personel_job">
+			   
+				<field type="UserUnit" name="HealthUnitId" label="COM_ELGPEDY_HEALTH_UNIT" class="form-control" />
+				<field
+					name="PersonelCategoryId"
+					type="SQLRemote"
+					label="COM_ELGPEDY_CATEGORY" 
+					query="select PersonelCategoryId as value, DescEL as PersonelCategoryId from PersonelCategory order by DescEL" 
+					required="true"
+					class="form-control"
+				>
+				   <option value="">COM_ELG_SELECT</option>
+				</field> 
+				<field
+					name="PersonelSpecialityId"
+					type="SQLRemote"
+					label="COM_ELGPEDY_SPECIALITY" 
+					query="select PersonelSpecialityId as value, DescEL as PersonelSpecialityId from PersonelSpeciality order by DescEL" 
+					required="true"
+					class="form-control"
+				>
+				   <option value="">COM_ELG_SELECT</option>
+				</field>			
+			              
+				<field
+					name="PersonelEducationId"
+					type="SQLRemote"
+					label="COM_ELGPEDY_EDUCATION" 
+					query="select PersonelEducationId as value, DescEL as PersonelEducationId from PersonelEducation order by DescEL" 
+					required="true"
+					class="form-control"
+				>
+				   <option value="">COM_ELG_SELECT</option>
+				</field> 
+				
+			
+				<field
+					name="PersonelDepartmentId"
+					type="SQLRemote"
+					label="COM_ELGPEDY_DEPARTMENT" 
+					query="select PersonelDepartmentId as value, DescEL as PersonelDepartmentId from PersonelDepartment order by DescEL" 
+					required="true"
+					class="form-control"
+				>
+				   <option value="">COM_ELG_SELECT</option>
+				</field> 
+				<field
+					name="PersonelPositionId"
+					type="SQLRemote"
+					label="COM_ELGPEDY_PERSONEL_POSITION" 
+					query="select PersonelPositionId as value, DescEL as PersonelPositionId from PersonelPosition order by DescEL" 
+					required="true"
+					class="form-control"
+				>
+				   <option value="">COM_ELG_SELECT</option>
+				</field> 
+				
+		</fieldset>
+		<fieldset name="personel_moves">
+				<field
+					name="RefHealthUnitId"
+					type="SQLRemote"
+					label="Μον. Υπηρεσίας" 
+					query="select HealthUnitId as value, DescEL as RefHealthUnitId from HealthUnit order by DescEL" 
+					
+					class="form-control"
+				>
+				   <option value="">COM_ELG_SELECT</option>
+				</field>
+				<field
+					name="RefUnitStartDate"
+					type="Calendar"
+					label="Έναρξη Υπηρεσίας"
+					format="%d/%m/%Y"
+					class="calendar-form-control"
+					required="true" />
+				<field
+					name="RefUnitEndDate"
+					type="Calendar"
+					label="Τέλος Υπηρεσίας"
+					format="%d/%m/%Y"
+					class="calendar-form-control" />
+					<field
+					name="PersonelStatusId"
+					type="SQLRemote"
+					label="COM_ELG_PEDY_PERSONEL_STATUS_ID" 
+					query="select PersonelStatusId as value, DescEL as PersonelStatusId from PersonelStatus where PersonelStatusId in (1,2,3,4,5,6,56,62) order by DescEL" 
+					
+					class="form-control"
+				>
+				   <option value="">COM_ELG_SELECT</option>
+				</field>
+		</fieldset>
+	</fields>
+</form>

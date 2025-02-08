@@ -1,0 +1,42 @@
+<form>
+	<fields>
+            <fieldset>
+                 <field name="idUnit" type="sql" 
+                        query="select HealthUnitId as value, DescEL as HealthUnitId from HealthUnit order by DescEL" key_field="idUnit" value_field="value" required="true" >
+                    <option value=""></option>
+                </field>
+                <field
+                    name="RefMonth"
+                    type="list"
+                    label="COM_ELG_PEDY_MONTH"
+                    required="true"
+					class="form-control"
+                >
+					<option value="">COM_ELG_SELECT</option>
+					<option value="1">JANUARY</option>
+					<option value="2">FEBRUARY</option>
+					<option value="3">MARCH</option>
+					<option value="4">APRIL</option>
+					<option value="5">MAY</option>
+					<option value="6">JUNE</option>
+					<option value="7">JULY</option>
+					<option value="8">AUGUST</option>
+					<option value="9">SEPTEMBER</option>
+					<option value="10">OCTOBER</option>
+					<option value="11">NOVEMBER</option>
+					<option value="12">DECEMBER</option>
+                </field>
+                <field name="RefYear" type="integer"  label="COM_ELG_PEDY_YEAR" first="2009" last="2020" step="1"  required="true" class="form-control">
+                        <option value="">COM_ELG_SELECT</option>
+                </field>
+                <field name="checker" type="text"  label="COM_ELG_PEDY_CHECKER"  required="true" class="form-control">
+                    <option value="">COM_ELG_SELECT</option>
+                </field>
+                <field type="UserUnit" name="HealthUnitId" label="COM_EL_PEDY_HEALTH_UNIT" class="form-control" />
+                <field name="RefDate" type="calendar" label="COM_EL_PEDY_DATE" required="true" format="%d/%m/%Y" />
+                <field name="RefDateFrom" type="calendar" label="COM_EL_PEDY_DATE_FROM"  format="%d/%m/%Y" />
+                <field name="RefDateTo" type="calendar" label="COM_EL_PEDY_DATE_TO"   format="%d/%m/%Y" />
+                
+            </fieldset>
+	</fields>
+</form>

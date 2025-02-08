@@ -1,0 +1,156 @@
+<form>
+ 
+            <field type="hidden" name="id" />
+            <field type="hidden" name="idCovidMonitorDetails" />
+         
+           <field name="id_health_unit" 
+                   type="UserUnitExact"
+                   label="Μονάδα"
+                   required="true"
+                   
+                   class="form-control"
+            />
+             
+            <field type="calendar" name="ref_date" required="true" label="Ημερομηνία"  format="%d/%m/%Y"   class="form-control calendar-form-control " />
+            
+            <field name="MunicipalitySectorId" 
+                   type="SQLRemote"
+                   label="Τομέας"
+                   required="true"
+                   query="select MunicipalitySectorId as value, MunicipalitySectorDesc as MunicipalitySectorId from MunicipalitySector order by value"
+                   class="form-control"
+            >
+                <option>COM_EL_SELECT</option>
+            </field>
+			
+            <field type="list" name="contact_name" required="true" label="Όνομα/επώνυμο υπεύθυνου"   class="form-control" >
+                 <option value="">COM_EL_SELECT</option>
+            </field>
+            <!-- query="select PersonelDepartmentId as value, DescEL as contact_spec from PersonelDepartment order by contact_spec" -->
+            <field 
+                name="contact_spec"
+                    type="list"
+                    label="Κλάδος/Ιδιότητα ατόμου αναφοράς" 
+                    required="true"                    
+                   class="form-control"
+                   >
+                <option value="">COM_EL_SELECT</option>
+            </field>
+			
+            <field type="tel" name="contact_phone" required="false"  label="Τηλέφωνο" placeholder="210-1234-123" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}"   class="form-control" />
+			
+            <field type="email" name="contact_email" required="false" label="Email"    filter="email" class="form-control"/>
+          
+            
+            
+            
+                     
+         
+            
+            
+            
+            
+            <field name="id_gender" 
+                   type="SQLRemote"
+                   label="ΦΥΛΟ"
+                   required="true"
+                   query="select id as value, gender as id_gender from Gender order by value"
+                   class="form-control"
+            >
+                <option>COM_EL_SELECT</option>
+            </field>
+            
+			<!-- field type="text" name="name"   label="Όνομα/επώνυμο"   class="form-control"  required="true"  / -->  
+			
+            <field type="integer" name="age"   label="Ηλικία"   first="1" last="110" step="1"   class="form-control"  required="true"  />  
+            
+           <!-- field type="text" name="nationality"   label="Υπηκοότητα"   class="form-control"  required="true"  / -->
+           
+          
+              
+            <field name="id_ClinicType"    
+                   type="SQLRemote"
+                   label="Ιατρείο"
+                   required="true"
+                   query="select ClinicTypeId as value, DescEL as id_ClinicType from ClinicType where ClinicTypeId in (4,24,25,78,79) order by ClinicTypeId"
+                   class="form-control"
+            >
+                <option>COM_EL_SELECT</option>
+            </field>
+
+            <field type="tel" name="clinic_phone" label="Τηλ. Ιατρείου" required="true" placeholder="210-1234-123" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" class="form-control"  />
+            
+			<field type="tel" name="dep_phone" label="Τηλ. Τμήματος" required="true" placeholder="210-1234-123" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" class="form-control" />
+            
+			<field type="sqlRemote" name="id_PersonelSpeciality"  label="Επαγγελματίας Υγείας"   class="form-control"
+                            query="select PersonelSpecialityId as value,  DescEL as id_PersonelSpeciality from PersonelSpeciality"
+                             required="false"
+            >
+                <option value="">COM_EL_SELECT</option>
+            </field>
+            <field name="id_treatment" 
+                   type="SQLRemote"
+                   label="Θεραπευτική Αγωγή"
+                   required="true"
+                   query="select id as value, treatment as id_treatment from CovidTreatment order by value"
+                  class="form-control"
+            >
+                <option>COM_EL_SELECT</option>
+            </field>
+			
+            <field name="id_labcheck" 
+                   type="SQLRemote"
+                   label="Εργαστηριακός Έλεγχος"
+                   required="true"
+                   query="select id as value, labCheck as id_labcheck from CovidLabCheck order by value"
+                  class="form-control"
+            >
+                <option>COM_EL_SELECT</option>
+            </field>
+        
+            <field name="HomeVisit" 
+                   type="SQLRemote"
+                   label="Επίσκεψη κατ'οίκον"
+                   required="true"
+                   query="select id as value, yesno as HomeVisit from yesno order by value"
+                   class="form-control"
+            >
+                <option>COM_EL_SELECT</option>
+            </field>
+			 <field type="calendar" name="HomeVisitDate" required="false" label="Ημερομηνία Λήψης/Επίσκεψης"  format="%d/%m/%Y"   class="form-control calendar-form-control " />
+           <field name="isMedicalPers" 
+                   type="SQLRemote"
+                   label="Προσωπικό Υπηρεσιών Υγείας"
+                   required="true"
+                   query="select id as value, yesno as isMedicalPers from yesno order by value"
+                   class="form-control"
+            >
+                <option>COM_EL_SELECT</option>
+            </field> 
+             <field name="HomeVisitNo" 
+                   type="List"
+                   label="A/A Επίσκεψης κατ'οίκον"
+                   required="false"
+                   
+                   class="form-control"
+            >
+                <option>COM_EL_SELECT</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+            </field>   
+            <field name="id_outcome" 
+                   type="SQLRemote"
+                   label="Έκβαση"
+                   required="true"
+                   query="select id as value, outcome as id_outcome from CovidOutcome order by value"
+                  class="form-control"
+            >
+                <option>COM_EL_SELECT</option>
+            </field>
+			
+			<field type="calendar" name="ResultDate" required="false" label="Ημερομηνία Αποτελέσματος"  format="%d/%m/%Y"   class="form-control calendar-form-control " />
+  
+</form>

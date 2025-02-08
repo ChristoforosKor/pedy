@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields>
+            <fieldset >
+                <field name="PersonelAttendanceBookRafinaId" type="hidden" />
+                <!-- field name="PersonelId" class="form-control" label="Προσωπικό" description="Επιλεξτε το προσωπικό για το οποίο καταχωρείται την αδεια" type="SQLParam" query="select s.* from (select {p1}) parm , pedy.vw_lstPersonelByUser s;" key_field="PersonelId" value_field="LastName" required="true" / -->
+                <field name="PersonelId" class="form-control" label="Προσωπικό" description="Επιλεξτε το προσωπικό για το οποίο καταχωρείτε την αδεια" 
+                    type="SQLParam"
+                    query="SELECT distinct   p.PersonelId, concat( p.LastName,' ' ,p.FirstName) as FullName
+							from PersonelHealthUnitHistory phu 
+							inner join Personel p on  phu.RefHealthUnitId =  {p1}   and p.PersonelId = phu.PersonelId and phu.endDate is null and p.StatusId != 3
+							order by fullname, PersonelId;" 
+                    required="true" 
+                    key_field="PersonelId" 
+                    value_field="FullName"/>
+
+                <field format="%d/%m/%Y" name="StartDate" label="Έναρξη"  type="calendar" class="calendar-form-control" description=" Επιλέξτε ημερομηνία έναρξης της άδειας" required="true" />
+		<field format="%d/%m/%Y" name="EndDate"  label="Λήξη" type="calendar" class="calendar-form-control" description=" Επιλέξτε την τελευταια ημερομηνία που έχει άδεια ο υπάλληλος" required="true" />
+                
+                <field name="PersonelStatusId" label="Τύπος άδειας" class="form-control" description=" Επιλέξτε τύπο αδειας" type="list" />
+                <field name="PersonelStatusGroupId" label="Ομάδα άδειας" class="form-control" description=" Επιλέξτε ομάδα αδειας" type="SQLRemote" query="select PersonelStatusGroupId, DescEL from PersonelStatusGroup order by DescEL" key_field="PersonelStatusGroupId" value_field="DescEL" required="true" />
+				<field name="Duration" type="integer"  class="form-control" description=" Επιλέξτε αριθμό ημερών αδείας (χωρίς σαββατοκύριακα και αργίες)" default="Some integer" label="Ημερες Αδείας" first="1" last="25" step="1" required="true"/>
+				<field name="Year" class="form-control" type="list"  description=" Επιλέξτε έτος" label="Έτος" required="true">
+					<option value="2014">2014</option>
+					<option value="2015">2015</option>
+					<option value="2016">2016</option>
+					<option value="2017">2017</option>
+					<option value="2018">2018</option>
+					<option value="2019">2019</option>
+					<option value="2020">2020</option>
+					<option value="2021">2021</option>
+				</field>
+				<field name="Details" type="textarea"  label="" description=" Καταγράψτε οποιαδήποτε παρατήρηση σχετικά με την άδεια"  cols="120" rows="8" />
+            </fieldset>
+	</fields>
+</form>
