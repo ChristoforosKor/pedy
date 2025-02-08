@@ -1,0 +1,67 @@
+<form>
+    Παραλαβή Φιαλιδίων από Διαγνωστικό Κέντρο στο Κ.Υ. 	Επίχρισματα/Δείγματα προς το Διαγνώστικό Κέντρο	Αποτελέσματα HPV TEST από το Διαγνωστικό Κέντρο					Φιαλίδια Απόθεμα στο Κέντρο Υγείας 
+
+	<fields>
+            <fieldset>
+                 <field 
+                        label="COM_EL_PEDY_VIALS_RECEIVED_UNIT_HC"
+                        name="vial_received" 
+                        type="number"
+                        required="true" 
+                        min="0"
+                        >
+                </field>
+                <field 
+                        label="COM_EL_PEDY_SAMPLES_TO_HC"
+                        name="samples_to_hc" 
+                        type="number"
+                        required="true"
+                        min="0" 
+                        >
+                </field>
+                <field 
+                        label="COM_EL_PEDY_NEGATIVE"
+                        name="result_negative" 
+                        type="number"
+                        min="0"
+                        >
+                </field>
+                <field 
+                        label="COM_EL_PEDY_HPV_16"
+                        name="result_positive_hpv16" 
+                        type="number"
+                        min="0"
+                        >
+                </field>
+                <field 
+                        label="COM_EL_PEDY_HPV_18"
+                        name="result_positive_hpv18" 
+                        type="number"
+                        min="0"
+                        >
+                </field>
+                <field 
+                        label="COM_EL_PEDY_POSITIVE_TO_ASCSUS"
+                        name="result_positive_ascsus" 
+                        type="number"
+                        min="0"                     
+                        >
+                </field>
+                <field 
+                        label="COM_EL_PEDY_NEGATIVE"
+                        name="result_positive_to_pap_negative" 
+                        type="number"
+                        min="0"                     
+                        >
+                </field>
+                <field 
+                        label="COM_EL_PEDY_VIALS_STOCK"
+                        name="vials_in_stock" 
+                        type="number"
+                        min="0"                     
+                        >
+                </field>
+                    
+            </fieldset>
+	</fields>
+</form>
