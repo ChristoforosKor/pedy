@@ -34,9 +34,18 @@
                 </field>
                 <field type="UserUnit" name="HealthUnitId" label="COM_EL_PEDY_HEALTH_UNIT" class="form-control" />
                 <field name="RefDate" type="calendar" label="COM_EL_PEDY_DATE" required="true" format="%d/%m/%Y" />
-                <field name="RefDateFrom" type="calendar" label="COM_EL_PEDY_DATE_FROM"  format="%d/%m/%Y" />
-                <field name="RefDateTo" type="calendar" label="COM_EL_PEDY_DATE_TO"   format="%d/%m/%Y" />
-                
+                <field name="RefDateFrom" type="calendar" label="COM_EL_PEDY_DATE_FROM" class="calendar-form-control" format="%d/%m/%Y" />
+                <field name="RefDateTo" type="calendar" label="COM_EL_PEDY_DATE_TO"   class="calendar-form-control" format="%d/%m/%Y" />
+                 <field 
+                label="COM_EL_PEDY_EXAMS_CENTER"
+                name="exam_center_id" 
+                type="SQLRemote"
+                query="select id as value, exam_center as exam_center_id from ExamCenter order by exam_center"
+                required="true" 
+                class="form-control"
+            >
+                <option value="" >JGLOBAL_SELECT_AN_OPTION</option>
+            </field>
             </fieldset>
 	</fields>
 </form>

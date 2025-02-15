@@ -9,5 +9,9 @@
 ------------------------------------------------------------------------- */
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
+use Joomla\CMS\Factory;
 use elogism\ELComponent;
+
+
 ELComponent::init();
+
