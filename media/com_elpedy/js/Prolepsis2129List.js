@@ -1,23 +1,17 @@
-/*------------------------------------------------------------------------
- # com_elergon - e-logism
- # ------------------------------------------------------------------------
- # author    Christoforos J. Korifidis
- # @license - E Logism Proprietary Software Licence http://www.e-logism.gr/licence.pdf
- # Website: http://www.e-logism.gr
- ----------------------------------**/
+
 var options;
 
 
 export function init(optionsIn) {
     options = optionsIn;
     options.table = jQuery(optionsIn.tableSelector);
-    options.btSearch = document.getElementById('btProlepsisListSearch');
+    options.btSearch = document.getElementById('btProlepsis2129ListSearch');
     options.table.bootstrapTable({
         url: options.dataUrl
         , pagination: true
         , sidePagination: 'server'
         , idField: 'id'
-        , toolbar: '#prolepsisListToolbar'
+        , toolbar: '#prolepsis2129ListToolbar'
 
         , queryParams: function (params) {
             params.filter_order_Dir = params.order;
@@ -26,7 +20,7 @@ export function init(optionsIn) {
 //            params.HealthUnitId = document.getElementById('HealthUnitId').value;
             params.RefDateFrom = getRefDate(document.getElementById('RefDateFrom'));
             params.RefDateTo = getRefDate(document.getElementById('RefDateTo'));
-            params.exam_center_id = document.getElementById('exam_center_id').value;
+//            params.exam_center_id = document.getElementById('exam_center_id').value;
             delete params.order;
             delete params.sort;
             delete params.offset;
@@ -39,53 +33,46 @@ export function init(optionsIn) {
                 field: 'RefDate',
                 title: Joomla.Text._('JDATE'),
                 formatter: formatDate,
+                align: 'right',
+                halign: 'center',
+                sortable: true
+            },{
+                field: 'samples_to_check',
+                title: Joomla.Text._('COM_EL_PEDY_SAMPLES_TO_CHECK_TO_NEXT'),
                 sortable: true,
+                width: '200px',
+                align: 'right',
                 halign: 'center'
+                                
+                
             }, {
-                field: 'exam_center',
-                title: Joomla.Text._('COM_EL_PEDY_EXAMS_CENTER_CONDENSED'),
+                field: 'result_ok',
+                title: Joomla.Text._('COM_EL_PEDY_RESULT_NORMAL'),
                 sortable: true,
+                width: '200px',
+                align: 'right',
                 halign: 'center'
+                
             }, {
-                field: 'vials_received',
-                title: Joomla.Text._('COM_EL_PEDY_RECEIVES'),
+                field: 'result_notok',
+                title: Joomla.Text._('COM_EL_RESULT_NOT_OK'),
                 sortable: true,
+                width: '200px',
                 align: 'right',
                 halign: 'center'
             }, {
-                field: 'samples_to_hc',
-                title: Joomla.Text._('COM_EL_PEDY_TO_EXAM_CENTER'),
+                field: 'vials_in_stock',
+                title: Joomla.Text._('COM_EL_PEDY_VIALS_STOCK'),
                 sortable: true,
-                align: 'right',
-                halign: 'center'
-            }, {
-                field: 'result_negative',
-                title: Joomla.Text._('COM_EL_PEDY_NEGATIVE'),
-                sortable: true,
-                align: 'right',
-                halign: 'center'
-            }, {
-                field: 'result_positive_hpv16',
-                title: Joomla.Text._('COM_EL_PEDY_HPV_16'),
-                sortable: true,
-                align: 'right',
-                halign: 'center'
-            }, {
-                field: 'result_positive_hpv18',
-                title: Joomla.Text._('COM_EL_PEDY_HPV_18'),
-                sortable: true,
-                align: 'right',
-                halign: 'center'
-            }, {
-                field: 'result_positive_to_pap_negative',
-                title: Joomla.Text._('COM_EL_PEDY_POSITIVE_TO_PAP'),
-                sortable: true,
+                width: '200px',
                 align: 'right',
                 halign: 'center'
             }, {
                 field: 'id',
                 title: '',
-                formatter: formatEdit
+                formatter: formatEdit,
+                width:'270px',
+                align: 'center'
             }]
 
     });
@@ -113,7 +100,7 @@ function formatDate(val) {
     return moment(val).format('DD/MM/YYYY');
 }
 
-
+ 
 
 function formatEdit(val) {
     return '<a href="' + options.editUrl + '&id=' + val + '" class="btn btn-primary" >' + Joomla.Text._('JACTION_EDIT')
@@ -128,17 +115,17 @@ function responseHandler(res) {
 export function delQuestion(trg) {
     document.getElementById('delId').value = trg.value;
     var row = trg.parentNode.parentNode;
-    document.querySelector('#prolepsisDelete .text-info').textContent = row.cells[0].textContent + ' - ' + row.cells[1].textContent + ' - ' + row.cells[2].textContent + ' -  ' + row.cells[3].textContent + ' -  ' + row.cells[4].textContent;
-    jQuery('#prolepsisDelete').modal('show');
+    document.querySelector('#prolepsis2129Delete .text-info').textContent = row.cells[0].textContent + ' - ' + row.cells[1].textContent + ' - ' + row.cells[2].textContent + ' -  ' + row.cells[3].textContent + ' -  ' + row.cells[4].textContent;
+    jQuery('#prolepsis2129Delete').modal('show');
 }
 
 export function delRec() {
 
     jQuery.post(options.delUrl, {id: document.getElementById('delId').value}, function (response) {
-        elgsJS.renderAppMessages(response, 'HTMLBootstrap', {messageArea: document.querySelector('#prolepsisDelete .text-info')});
+        elgsJS.renderAppMessages(response, 'HTMLBootstrap', {messageArea: document.querySelector('#prolepsis2129Delete .text-info')});
         if (!elgsJS.hasErrors(response)) {
             setTimeout(function () {
-                jQuery('#prolepsisDelete').modal('hide');
+                jQuery('#prolepsis2129Delete').modal('hide');
             }, 1000);
             options.table.bootstrapTable('refresh');
         }

@@ -1,0 +1,63 @@
+<form>
+    
+    <fields>
+        <fieldset>
+            <field 
+                name="id" 
+                type="hidden"
+                        
+            />
+                    
+            <field 
+                label="JDATE"
+                name="RefDate" 
+                type="Calendar"
+                required="true"
+                format="%d/%m/%Y"
+                default="NOW" 
+                class="calendar-form-control"
+            >
+               
+            </field>
+            
+            
+            
+            <field 
+                label="COM_EL_PEDY_SAMPLES_TO_CHECK_TO_NEXT"
+                name="samples_to_check" 
+                type="number"
+                required="true" 
+                min="0"
+                class="form-control"
+            >
+            </field>
+            <field 
+                label="COM_EL_PEDY_RESULT_NORMAL"
+                name="result_ok" 
+                type="number"
+                required="true"
+                min="0" 
+                class="form-control"
+            >
+            </field>
+            <field 
+                label="COM_EL_RESULT_NOT_OK"
+                name="result_notok" 
+                type="number"
+                min="0"
+                class="form-control"
+            >
+            </field>
+            <field 
+                label="COM_EL_PEDY_VIALS_STOCK"
+                name="vials_in_stock" 
+                type="number"
+                min="0"
+                class="form-control"
+            >
+            </field>
+            
+                    
+        </fieldset>
+    </fields>
+</form>

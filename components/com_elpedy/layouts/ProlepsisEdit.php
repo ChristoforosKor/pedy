@@ -15,31 +15,35 @@ use Joomla\CMS\Language\Text;
     .tm-7 {
         margin-top: 7rem;
     }
+    
+    h2 {
+        margin-bottom: 5rem;
+    }
 </style>
 
 <link href="/media/com_elpedy/css/site.stylesheet.css" rel="stylesheet" type="text/css"/>
 <div class="el prolepsis-edit section">
-    <h2><?php echo Text::_("COM_EL_PEDY_PROGRAM"); ?></h2>
+    <h2><?php echo Text::_("COM_EL_PEDY_PROGRAM"); ?> <?php echo Text::_("COM_EL_PEDY_HPV_3065") ?></h2>
     <div class="msg-area"></div>
     <form method="post" action="" id="prolepsisHPV3065">
              <?php echo $this->formProlepsis->renderField('id'); ?>
-            <legend><?php echo Text::_("COM_EL_PEDY_HPV_3065") ?></legend>
+            
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <?php echo $this->formProlepsis->renderField('RefDate'); ?>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <?php echo $this->formProlepsis->renderField('exam_center_id'); ?>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <?php echo $this->formProlepsis->renderField('vials_received'); ?>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <?php echo $this->formProlepsis->renderField('samples_to_hc'); ?>
                 </div>
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <?php echo $this->formProlepsis->renderField('vials_in_stock'); ?>
                 </div>
             </div>
@@ -47,35 +51,42 @@ use Joomla\CMS\Language\Text;
               <h3><?php echo Text::_('COM_EL_PEDY_RESULTS_FROM_HC'); ?></h3>
             <div class="row">
                   
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <?php echo $this->formProlepsis->renderField('result_negative'); ?>
 
                 </div>
             </div>
-            <h4><?php echo Text::_('COM_EL_PEDY_POSITIVE_TO_VIO'); ?></h4>
+              <fieldset>
+                  <legend><?php echo Text::_('COM_EL_PEDY_POSITIVE_TO_VIO'); ?></legend>
+              
+          
             <div class="row">
                 
                     
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <?php echo $this->formProlepsis->renderField('result_positive_hpv16'); ?>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <?php echo $this->formProlepsis->renderField('result_positive_hpv18'); ?>
                     </div>
             </div>
-            <h4><?php echo Text::_('COM_EL_PEDY_POSITIVE_TO_PAP'); ?></h4>
+                  </fieldset>
+              <fieldset>
+                  <legend><?php echo Text::_('COM_EL_PEDY_POSITIVE_TO_PAP'); ?></legend>
+             
+            
             <div class="row">
                 
                     
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <?php echo $this->formProlepsis->renderField('result_positive_ascsus'); ?>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <?php echo $this->formProlepsis->renderField('result_positive_to_pap_negative'); ?>
                     </div>
                 
             </div>
-           
+            </fieldset>
 
             <div class="row tm-7">
 <!--                <div class="col-md-2">
