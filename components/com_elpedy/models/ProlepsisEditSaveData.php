@@ -16,16 +16,16 @@ use JModelBase;
 use Joomla\Registry\Registry;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
-class ProlepsisSaveData extends JModelBase {   
+class ProlepsisEditSaveData extends JModelBase {   
  
     
       public function setState(Registry $state) {
         $tbProlepsis = Table::getInstance('Prolepsis');
         $data = $state -> toArray();
+        
         $tbProlepsis -> bind(  $data );
         $tbProlepsis -> check();
-        $tbProlepsis -> store();
-        
+        $res = $tbProlepsis -> store();
         $id = $tbProlepsis -> id;
         $state -> set('id', $id );
         parent::setState( $state );

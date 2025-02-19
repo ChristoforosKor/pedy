@@ -94,7 +94,7 @@
                 name="vials_in_stock" 
                 type="number"
                 min="0"    
-                class="form-control input-label-1mt "                 
+                class="form-control "                 
             >
             </field>
                     

@@ -41,6 +41,12 @@
 	border:3px ridge Silver;
 }
 
-.input-label-1mt {
-    margin-top:14px;
+
+.control-group {
+    width: 100%;  
 }
+
+.control-label label {
+    height:34px;
+}
+
