@@ -35,7 +35,7 @@ const Prolepsis = (function () {
 
 
     const submitForm = (e) => {
-//        elgsJS.showAsBusy('#prolepsisHPV3065', '.prolepsisHPV3065.el-busy');
+        elgsJS.showAsBusy('#prolepsisHPV3065', '.prolepsisHPV3065.el-busy');
         e.preventDefault();
         const frmValues = jQuery(e.target).serializeArray();
         const sampleDateIndex = frmValues.findIndex(elm => {

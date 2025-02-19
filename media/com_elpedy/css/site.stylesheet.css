@@ -18,7 +18,7 @@
 
 /*div.calendar table {width:100%}*/
 
-.el-busy{text-align:center; background-image: url('/images/loader.gif');height:128px; background-position: center center; background-repeat: no-repeat}
+.el-busy{text-align:center; background-image: url('/images/loader.gif');height:128px; background-position: center center; background-repeat: no-repeat;display:none}
 #vaccinesListToolbar label{display:block}
 #vaccinesListToolbar .buttons{padding-top: 15px}
 

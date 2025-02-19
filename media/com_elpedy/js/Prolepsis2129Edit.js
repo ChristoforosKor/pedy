@@ -30,7 +30,7 @@ const Prolepsis = (function () {
 
 
     const submitForm = (e) => {
-
+        elgsJS.showAsBusy('#prolepsis2129', '.prolepsis2129.el-busy');
         e.preventDefault();
         const frmValues = jQuery(e.target).serializeArray();
         const sampleDateIndex = frmValues.findIndex(elm => {
