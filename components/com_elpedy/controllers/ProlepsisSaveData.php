@@ -19,8 +19,6 @@ class ProlepsisSaveData extends ElController {
      protected function createState(Input $input = null) : Registry 
     {
         $data = $input -> getArray();
-//        $data['id'] = $input -> getInt('vaccine_patient_id', null);
-     
-         return new Registry( $data );
+        return new Registry( $data );
     }
 }
