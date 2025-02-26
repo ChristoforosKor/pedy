@@ -22,8 +22,9 @@ class Html extends View {
                 , $this -> getHTMLUrls()
                 );
                 
-                
-        $this->listUrl = $endPoints['Prolepsis2129sList'];                
+             
+        $this->listUrl = $endPoints['Prolepsis2129List'];     
+        
         $doc = Factory::getDocument();
         $doc -> addScriptOptions('com_elpedy',  $endPoints);
         

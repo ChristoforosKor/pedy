@@ -85,7 +85,7 @@ const Prolepsis = (function () {
                         prolepsis2129Elms[key].value = dt.format('DD/MM/YYYY');
                     }
                     else {
-                        prolepsis2129Elms[key].value = response.data.data.prolepsisData[key];
+                        prolepsis2129Elms[key].value = response.data.data.prolepsis2129Data[key];
                     }
                 }
                 catch(e) {
