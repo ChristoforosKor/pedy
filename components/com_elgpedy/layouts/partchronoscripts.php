@@ -9,12 +9,16 @@
  defined('_JEXEC') or die('Restricted access');
 
  use Joomla\CMS\Uri\Uri;
- if ( strpos( Uri::getInstance() ->getQuery(), 'report') === false
+ if(strpos(Uri::getInstance() -> toString(), 'personelattendancybook') !== false) {
+     echo "<script>var pedyOnlyOneDate = moment(); </script>";
+ }
+ elseif ( strpos( Uri::getInstance() ->getQuery(), 'report') === false
       && strpos( Uri::getInstance() ->getQuery(), 'dentalexams') === false 
       && strpos( Uri::getInstance() ->getQuery(), 'adiologio') === false )
  {
      echo "<script>var pedyDateFrom = moment().subtract(900, 'd')</script>";
  }
+
 ?>
 <script type="text/javascript">
      var unitsUrls = {};
@@ -35,9 +39,14 @@
             };
         if ( typeof pedyDateFrom !== 'undefined')
         {
+            
             pedyDateTimePickerOptions.startDate =  pedyDateFrom.format('YYYY-MM-DD');
+          
         }
-                   
+         if (typeof pedyOnlyOneDate !== 'undefined') {
+             pedyDateTimePickerOptions.startDate = pedyOnlyOneDate.format('YYYY-MM-DD');
+             pedyDateTimePickerOptions.endDate = pedyOnlyOneDate.format('YYYY-MM-DD');
+         }        
         jQuery('.form_datetime').datetimepicker(
                 pedyDateTimePickerOptions
                 )
