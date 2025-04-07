@@ -20,6 +20,8 @@
    
     class ElgPedyViewClinicalTransactionReport extends  DataCommonReport
     {
+        protected $reformedDataInGroups;
+        
         public function render()
         {
             $data = $this->state->get('data');
@@ -32,7 +34,7 @@
             if (isset($data -> data)):
                     $this->dataClinical = ViewUtils::ClinicalReform($data -> data);
             endif;
-            $this -> incidentsGroups = $data -> fields -> incidentsGroups;
+            $this->reformDataInGoups($data->inClinicGroup); 
             if (isset($data -> newData)):
                 $clinics = ViewUtils::groupClincsByIsSummed ( $data -> fields -> clinics );
                 $sumedClinics = array_column( $clinics['summed'], 'ClinicId');
@@ -48,7 +50,7 @@
                     $this-> newDataSumed = ViewUtils::ClinicalReform( $dataSummed ); //ViewUtils::ClinicalReformClinicDoctorRecords($dataSummed, $data -> doctors); 
                     $this -> doctors = $data -> doctors;
             endif;
-            
+            $this->clinicGroupData =$data->clinicGroupData;
             $this -> sumedClinics = $clinics['summed']; //( isset($sumedClinics ) ? array_map(function ($val) { return (object) $val; }, $sumedClinics ) : [] );
             $this -> notSumedClinics = $clinics['notSummed']; // ( isset($notSumedClinics ) ? array_map( function ( $val ){ return (object) $val ;}, $notSumedClinics): []  );
             $this -> d1 = $data -> d1;
@@ -58,4 +60,41 @@
             $this->submitUrl = JRoute::_('index.php?option=com_elgpedy&Itemid=112');
             return parent::render();
         }	
+        
+        private function reformDataInGoups($data) 
+        {
+            $reformed = [];
+            foreach($data as $item)
+            {
+                if (!isset($reformed[$item->ClinicGroup])) 
+                {
+                    $reformed[$item->ClinicGroup] = ['id' => $item->ClinicGroupId, 'clinics' => [], 'head' => []];
+                }
+                if (!isset($reformed[$item->ClinicGroup]['clinics'][$item->ClinicTypeId]))
+                {
+                    $reformed[$item->ClinicGroup]['clinics'][$item->Clinic] = ['id' => $item->ClinicTypeId, 'incidents' => []];
+                }
+                if (!isset($reformed[$item->ClinicGroup]['clinics'][$item->Clinic]['incidents'][$item->ClinicIncident]))
+                {
+                    $reformed[$item->ClinicGroup]['clinics'][$item->Clinic]['incidents'][$item->ClinicIncident]
+                            = ['id' => $item->ClinicIncidentId, 'quantity' => 0];
+                    $reformed[$item->ClinicGroup]['head'][$item->ClinicIncidentId] = $item->ClinicIncident;
+                }
+                
+                $reformed[$item->ClinicGroup]['clinics'][$item->Clinic]['incidents'][$item->ClinicIncident]['quantity'] += $item->Quantity;
+            }
+            $this->reformedDataInGroups = $reformed;
+        }
+        
+        protected function extractValue($clinicGroup, $clinic, $incident)
+        {
+            try {
+                return $this->reformedDataInGroups[$clinicGroup]['clinics'][$clinic]['incidents'][$incident]['quantity'];
+            } catch (Exception $ex) {
+                return '';
+            }
+        }
     }
+
+    
+  

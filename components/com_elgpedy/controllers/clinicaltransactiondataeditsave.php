@@ -31,10 +31,11 @@ class ElgPedyControllerClinicalTransactionDataEditSave extends QuantityDataEditS
 	{
 		$input = $this->getInput();
 		$this->formData->ClinicTypeId = $input->getInt('ctid');
-                                $this->formData->ClinicIncidentId = $input->getInt('iid');	
-                                $this->formData->PersonelId = $input->getInt('pid');
-                                 $this->formData->ClinicIncidentGroupId = $input->getInt('ig', 0);
-                                $this->state->set('formData', $this->formData);
+                $this->formData->ClinicIncidentId = $input->getInt('iid');	
+                $this->formData->PersonelId = $input->getInt('pid');
+                $this->formData->ClinicIncidentGroupId = $input->getInt('ig', 0);
+                $this->formData->ClinicGroupId = $input->getInt('icg', 0);
+                $this->state->set('formData', $this->formData);
 		try {
 		    $this->model->setState($this->state);	
 		}

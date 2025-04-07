@@ -11,10 +11,11 @@ defined('_JEXEC') or die('Restricted access');
 require_once JPATH_COMPONENT_SITE . '/models/pedydataedit.php';
 require_once JPATH_COMPONENT_SITE . '/models/queries.php';
 use Joomla\Registry\Registry;
-
+use Joomla\CMS\Factory;
 class ElgPedyModelClinicalTransaction extends PedyDataEdit {
 
     function getState() {
+      
         $oldState = parent::getState();
         $newState = new Registry();
         
@@ -22,6 +23,7 @@ class ElgPedyModelClinicalTransaction extends PedyDataEdit {
             $newState -> set( 'fields', $this -> getFields($oldState) );
         }
         $newState -> set ( 'data',  $this -> getData( $oldState ) );
+        $newState -> set ('dataInGroups', $this->getDataInGroups($oldState));
         $newState -> set ( 'refDate',  $oldState -> get('RefDate', '') );
         $newState -> set ( 'healthUnitId', $oldState -> get('HealthUnitId') );
         $newState -> set ( 'view', $oldState -> get('view') );
@@ -36,11 +38,22 @@ class ElgPedyModelClinicalTransaction extends PedyDataEdit {
         $this->query->clear();
         $this->query->select('ct.ClinicTransactionId, ct.ClinicDepartmentId, ct.UserId, ct.HealthUnitId, ct.ClinicTypeId, ct.ClinicIncidentId, ct.Quantity, ct.RefDate, ct.PersonelId, ct.ClinicIncidentGroupId')
                 ->from('#__ClinicTransaction ct')
-                ->where(' ct.StatusId = ' . ComponentUtils::$STATUS_ACTIVE . ' and ct.RefDate =\'' . $state->get('RefDate', '') . '\'  and ct.HealthUnitId = ' . $state->get('HealthUnitId'))
+                ->where(' ct.StatusId = ' . ComponentUtils::$STATUS_ACTIVE . ' and ct.RefDate =\'' . $state->get('RefDate', '') . '\'  and ct.HealthUnitId = ' . $state->get('HealthUnitId') . ' and ct.clinicGroupId = 0')
                 ->order('ClinicTypeId, ClinicIncidentId');
-       // echo $this -> query -> dump();
+       
         $this->pedyDB->setQuery($this->query);
-        
+        return $this->pedyDB->loadObjectList();
+    }
+    
+    public function getDataInGroups($state)
+    {
+        $this->query->clear();
+        $this->query->select('ct.ClinicTransactionId, ct.ClinicDepartmentId, ct.UserId, ct.HealthUnitId, ct.ClinicTypeId, ct.ClinicIncidentId, ct.Quantity, ct.RefDate, ct.PersonelId, ct.ClinicIncidentGroupId, ct.ClinicGroupId')
+                ->from('#__ClinicTransaction ct')
+                ->where(' ct.StatusId = ' . ComponentUtils::$STATUS_ACTIVE . ' and ct.RefDate =\'' . $state->get('RefDate', '') . '\'  and ct.HealthUnitId = ' . $state->get('HealthUnitId') . ' and ct.clinicGroupId != 0')
+                ->order('ClinicTypeId, ClinicIncidentId');
+       
+        $this->pedyDB->setQuery($this->query);
         return $this->pedyDB->loadObjectList();
     }
 
@@ -52,6 +65,7 @@ class ElgPedyModelClinicalTransaction extends PedyDataEdit {
         $this->pedyDB->setQuery($this->query);
         $this->query->setQuery('select s.* from (select @p1:=' . $healthUnitId . ' p) parm , pedy.vw_lstClinicByHU s');
         $fields->clinics = $this->pedyDB->loadObjectList();
+    
         $this->query->setQuery('select distinct s.* from (select @p1:=' . $healthUnitId . ' p) parm , pedy.vw_lstIncidentByHU s where s.IncidentId<>10');
         $this->pedyDB->setQuery($this->query);
         $fields -> incidents = $this->pedyDB->loadObjectList();
@@ -62,11 +76,22 @@ class ElgPedyModelClinicalTransaction extends PedyDataEdit {
                         . " inner join ClinicDepartment d on d.ClinicDepartmentId = gr.DepartmentId "
                         . " group by gr.HealthUnitId, gr.ClinicTypeId, gr.ClinicIncidentId, ci.DescEL, ci.Tooltip, gr.DepartmentId, d.DescEL" )
                 -> loadObjectList();
-        //$fields -> incidents =  $this -> mergeIncidents( $fields -> incidentsNet, []);
+        
+        
         $this -> query -> setQuery('select cgr.HealthUnitId, cgr.ClinicTypeId, cgr.ClinicIncidentId, cgr.ClinicIncidentGroupId, cg.IncidentGroup, ci.DescEl as ClinicIncident from ClinicIncidentGroupRel cgr inner join ClinicIncidentGroup cg on cgr.ClinicIncidentGroupId = cg.id inner join ClinicIncident ci on ci.ClinicIncidentId = cgr.ClinicIncidentId  where HealthUnitId = ' . $state -> get('HealthUnitId') );
         $this -> pedyDB -> setQuery( $this -> query );
         $fields -> incidentsGroups = $this -> pedyDB -> loadObjectList();
         
+        $this->query->clear();
+        $sql = "select distinct cgct.idClinicGroup, cg.ClinicGroup, cgct.idClinicType, ct.DescEL as ClinicType, ct.DescShortEL as ClinicTooltip
+                    , ci.ClinicIncidentId, ci.DescEL as Incident 
+                    from ClinicGroup cg
+                    inner join ClinicGroup_ClinicType cgct on cgct.idClinicGroup = cg.id 
+                    inner join ClinicType ct on ct.ClinicTypeId = cgct.idClinicType 
+                    inner Join ClinicIncidentGroupRel cigr on cigr.ClinicTypeId = ct.ClinicTypeId and cigr.HealthUnitId = ". $this->pedyDB->quote($healthUnitId)
+                    . " inner Join ClinicIncident ci on ci.ClinicIncidentId = cigr.ClinicIncidentId";
+        $this->pedyDB->setQuery($sql);
+        $fields->fieldsInGroup = $this->pedyDB->loadObjectList();
         
         if ($fields->clinics == null) {
             $fields->clinics = array();
@@ -118,7 +143,7 @@ class ElgPedyModelClinicalTransaction extends PedyDataEdit {
                         from ClinicTransaction ct
                         inner join Personel p on ct.PersonelId = p.PersonelId and ct.StatusId = 1 and ct.RefDate = '$refDate' and ct.HealthUnitId = $HealthUnitID
                         ORDER BY LastName ";
-        //	echo $query;
+       
         $db->setQuery($query);
         $res = $db->loadAssocList();
         return $res;

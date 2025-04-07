@@ -19,6 +19,7 @@ require_once JPATH_COMPONENT_SITE . '/models/pedydataeditsave.php';
 		parent::__construct($state);
 		$this->table = JTable::getInstance('ClinicTransaction');
 	}
+        
 	function setState(JRegistry $state) 
 	{
 		
@@ -29,12 +30,14 @@ require_once JPATH_COMPONENT_SITE . '/models/pedydataeditsave.php';
 		$this->table->ClinicTypeId = $formData->ClinicTypeId;
 		$this->table->ClinicIncidentId = $formData->ClinicIncidentId;
 		$this->table->PersonelId = $formData->PersonelId;
-                                $this -> table -> ClinicIncidentGroupId = $formData->ClinicIncidentGroupId; 
-                                if ( isset( $formData -> EducationId ) != null )
-                                {
-                                    $this -> table -> ClinicIncidentGroupId = $formData->EducationId; 
-                                }
-                                $this->table->store();
+                $this->table->ClinicIncidentGroupId = $formData->ClinicIncidentGroupId; 
+                $this->table->ClinicGroupId = $formData->ClinicGroupId;
+               
+                if ( isset( $formData -> EducationId ) != null )
+                {
+                    $this -> table -> ClinicIncidentGroupId = $formData->EducationId; 
+                }
+                $this->table->store();
  
 	}
  }

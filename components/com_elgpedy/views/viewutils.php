@@ -69,6 +69,17 @@ class ViewUtils {
         return $dataClinical;
     }
     
+//    public function ClinicalGroupReform($data) {
+//        $dataClinicalGroup = [];
+//        foreach($data as $item) 
+//        {
+//            if (!isset($dataClinicalGroup)) {
+//                $dataClinicalGroup[$item->]
+//            }
+//        }
+//        
+//    }
+    
       /**
      * @param $data Array An array of objects that contains incidents data (e.g. ClinicalTransaction table)
      * @param $doctors An array containg doctors information

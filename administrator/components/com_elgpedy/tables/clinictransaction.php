@@ -23,6 +23,7 @@ class JTableClinicTransaction extends TablePedyTransaction {
     var $ClinicIncidentGroupId = null;
     var $EducationId = null;
     var $PatientAmka = null;
+    var $ClinicGroupId = null;
     function __construct() {
         parent::__construct('ClinicTransaction', 'ClinicTransactionId');
         $this->ClinicDepartmentId = 1;
@@ -185,6 +186,7 @@ class JTableClinicTransaction extends TablePedyTransaction {
                         , 'ClinicDepartmentId' => $this->ClinicDepartmentId
                         , 'EducationId' => $this -> EducationId
                         , 'PatientAmka' => $this -> PatientAmka
+                        , 'ClinicGroupId' => $this->ClinicGroupId
                 ];
 
         if ( $submitedData['EducationId'] > 0 ):
@@ -236,6 +238,7 @@ class JTableClinicTransaction extends TablePedyTransaction {
         $this->ClinicIncidentGroupId = $submitedData['ClinicIncidentGroupId'];
         $this->EducationId = $submitedData['EducationId'];
         $this->PatientAmka = $submitedData['PatientAmka'];
+        $this->ClinicGroupId = $submitedData['ClinicGroupId'];
     }
 
     private function insertNewWithStatus($statusId) {

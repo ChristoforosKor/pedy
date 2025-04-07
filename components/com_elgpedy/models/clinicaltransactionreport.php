@@ -52,6 +52,7 @@ class ElgPedyModelClinicalTransactionReport extends PedyDataEdit
 			$data->checker = 0;
 		}
 		
+        $data->inClinicGroup = $this->getDataInClinicGroups($this -> pedyDB, $whereClause);        
         if($state->get('format') == 'html')
         {
                 $data->fields = new stdClass();
@@ -94,7 +95,7 @@ class ElgPedyModelClinicalTransactionReport extends PedyDataEdit
 		-> leftJoin ("ClinicDepartment cd ON cd.ClinicDepartmentId = ct.ClinicDepartmentId")
 		-> innerJoin ("ClinicType clt ON clt.ClinicTypeId = ct.ClinicTypeId")
 		-> leftJoin("ClinicIncident ci ON ci.ClinicIncidentId = ct.ClinicIncidentId")
-		-> where ( $whereClause )
+		-> where ( $whereClause . 'and ClinicGroupId = 0 ' )
 		-> group('ClinicDepartmentId,ClinicTypeId, ClinicIncidentId, ClinicDepartment, Clinic, ClinicIncident,ct.ClinicIncidentGroupId')
 		-> order('HealthUnit, ClinicDepartment,  Clinic, ClinicIncident');
 		$db -> setQuery( $query );
@@ -128,13 +129,33 @@ class ElgPedyModelClinicalTransactionReport extends PedyDataEdit
 		-> innerJoin ("ClinicType clt ON clt.ClinicTypeId = ct.ClinicTypeId")
 		-> leftJoin("ClinicIncident ci ON ci.ClinicIncidentId = ct.ClinicIncidentId")
 		-> leftJoin("Personel p ON p.PersonelId = ct.PersonelId")
-		-> where ( $whereClause )
+		-> where ( $whereClause . ' and ClinicGroupId = 0 ' )
 		-> group('ClinicDepartmentId,ClinicTypeId, ClinicIncidentId, ClinicDepartment, Clinic, ClinicIncident, p.Firstname, p.LastName, ct.PersonelId, ct.ClinicIncidentGroupId')
 		-> order('HealthUnit, ClinicDepartment,  Clinic, ClinicIncident');
 		$db -> setQuery( $query );
 		return $db -> loadObjectList();
 	}
 	
+        
+        private function getDataInClinicGroups($db, $whereClause)
+	{
+         
+		$query = $db -> getQuery(true);
+		$query -> clear();
+		$query -> select("ct.ClinicDepartmentId, ct.ClinicTypeId, ct.ClinicIncidentId, sum(ct.Quantity) as Quantity, cd.`DescEL` as ClinicDepartment"
+                        . ", clt.`DescEL` as Clinic, ci.`DescEL` as ClinicIncident, hu.DescEl as HealthUnit, cg.ClinicGroup, ct.ClinicGroupId")
+		-> from("ClinicTransaction ct")
+		-> innerJoin("HealthUnit hu ON hu.HealthUnitId = ct.HealthUnitId")
+		-> leftJoin ("ClinicDepartment cd ON cd.ClinicDepartmentId = ct.ClinicDepartmentId")
+		-> innerJoin ("ClinicType clt ON clt.ClinicTypeId = ct.ClinicTypeId")
+		-> leftJoin("ClinicIncident ci ON ci.ClinicIncidentId = ct.ClinicIncidentId")
+		-> innerJoin("ClinicGroup cg ON ct.ClinicGroupId = cg.id")
+		-> where ( $whereClause . ' and ClinicGroupId = 1 ' )
+		-> group('ClinicDepartmentId,ClinicTypeId, ClinicIncidentId, ClinicDepartment, Clinic, ClinicIncident, hu.DescEl, ct.ClinicIncidentGroupId, cg.ClinicGroup, ct.ClinicGroupId')
+		-> order('HealthUnit, ClinicDepartment,  Clinic, ClinicIncident');
+		$db -> setQuery( $query );
+		return $db -> loadObjectList();
+	}
 	
 	private function getDateRanges1($from, $to)
 	{
