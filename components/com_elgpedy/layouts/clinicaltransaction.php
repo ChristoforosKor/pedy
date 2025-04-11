@@ -95,8 +95,10 @@ endif;
                         if (isset($groupData['clinicTypes'][$clinicName]['incidents'][$incidentName])):  
                             $clinicTypeId = $groupData['clinicTypes'][$clinicName]['id'];
                             $incidentId = $groupData['clinicTypes'][$clinicName]['incidents'][$incidentName]['id'];
-                            $value = $this->extractValue($groupData['id'], $clinicTypeId, $incidentId)
-?>                                 <td class="editableg warning editable-click" id="elgincg<?php echo $clinicTypeId; ?>-<?php echo $incidentId; ?>-<?php echo $groupData['id']; ?>"><?php echo $value; ?></td>
+                            $extractedValue = $this->extractValue($groupData['id'], $clinicTypeId, $incidentId);
+                            $shownValue = is_numeric($extractedValue) ? $extractedValue: 0;
+                            $className = $shownValue > 0 ? 'success' : 'warning';
+?>                                 <td class="editableg editable-click <?php echo $className; ?>"  id="elgincg<?php echo $clinicTypeId; ?>-<?php echo $incidentId; ?>-<?php echo $groupData['id']; ?>"><?php echo $shownValue; ?></td>
 <?php                   else: ?>
                                    <td style="background-color: silver"></td>
 <?php                   endif;

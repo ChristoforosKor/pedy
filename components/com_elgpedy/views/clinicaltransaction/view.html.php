@@ -158,8 +158,7 @@
         {
             try 
             {
-//                var_dump($this->reformedDataInGroups);
-                return $this->reformedDataInGroups[$clinicGroupId][$clinicTypeId][$clinicIncidentId]['Quantity'];
+                return trim($this->reformedDataInGroups[$clinicGroupId][$clinicTypeId][$clinicIncidentId]['Quantity']);
             }
             catch(Exception $e)
             {
