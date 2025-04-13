@@ -8,11 +8,7 @@
                         
             />
             
-            <field 
-                name="healthunit_id" 
-                type="hidden"
-                required="true"        
-            />
+            <field type="UserUnit" name="healthunit_id" required="true" label="COM_EL_PEDY_HEALTH_UNIT" class="form-control" />
                     
             <field 
                 label="JDATE"

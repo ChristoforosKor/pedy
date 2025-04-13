@@ -40,7 +40,7 @@ class ProlepsisEditSaveData extends JModelBase {
         $tbProlepsis = Table::getInstance('Prolepsis');
         $data = $state -> toArray();
         $tbProlepsis -> bind(  $data );
-        $tbProlepsis->healthunit_id = $healthunit_id;
+//        $tbProlepsis->healthunit_id = $healthunit_id;
         $tbProlepsis -> check();
         $res = $tbProlepsis -> store();
         $id = $tbProlepsis -> id;

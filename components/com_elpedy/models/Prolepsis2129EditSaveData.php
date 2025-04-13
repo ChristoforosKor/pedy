@@ -22,10 +22,27 @@ class Prolepsis2129EditSaveData extends JModelBase {
  
     
       public function setState(Registry $state) {
+        $app = Factory::getApplication();
+        $user = ComUtils::getCurrentUser();
+        
+        if ($user->guest) {
+            $app->enqueueMessage(Text::_('COM_EL_USER_DISCONNECTED'), 'warning');
+            $app->setHeader('Status', 401, true);
+            return;
+        }
+        
+        $healthunit_id = trim(ComUtils::getDefaultUnitId());
+        if ( empty($healthunit_id)) {
+           $app->enqueueMessage(Text::_('COM_EL_USER_NO_UNIT'), 'warning');
+           $app->setHeader('Status', 403, true);
+           return;
+        }
         $tbProlepsis = Table::getInstance('Prolepsis2129');
-       
         $data = $state -> toArray();
+        var_dump($data);
+        exit;
         $tbProlepsis -> bind(  $data );
+      
         $tbProlepsis -> check();
         $tbProlepsis -> store();
         $id = $tbProlepsis -> id;

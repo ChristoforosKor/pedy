@@ -20,6 +20,7 @@ const Prolepsis = (function () {
         prolepsis3065Elms = {
             RefDate: document.getElementById('RefDate'),
             id: document.getElementById('id'),  
+            healthunit_id: document.getElementById('healthunit_id'),
             exam_center_id: document.getElementById('exam_center_id'),
             vials_received: document.getElementById('vials_received'),
             samples_to_hc: document.getElementById('samples_to_hc'),

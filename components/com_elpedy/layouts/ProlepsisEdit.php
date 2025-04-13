@@ -35,6 +35,9 @@ use Joomla\CMS\Language\Text;
                 <div class="col-md-3">
                     <?php echo $this->formProlepsis->renderField('exam_center_id'); ?>
                 </div>
+                <div class="col-md-3">
+                    <?php echo $this->formProlepsis->renderField('healthunit_id'); ?>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-3">
