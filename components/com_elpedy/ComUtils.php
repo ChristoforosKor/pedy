@@ -82,5 +82,9 @@ class ComUtils {
             return $du;
         }
     }
+    
+    public static function getCurrentUser() {
+        return Factory::getUser();
+    }
 
 }
