@@ -23,20 +23,20 @@ use Joomla\CMS\Language\Text;
      .fixed-table-container .prolepsis2129-table tbody td .th-inner, .fixed-table-container .prolepsis2129-table  thead th .th-inner {
         white-space: pre-wrap;
         
-    }
-    
-    
-   
+    }  
 </style>
 <div class="el prolepsis2129-list">
     <div class="msg"></div>
     <div id="prolepsis2129ListToolbar">
         <div class="row" role="form">
             <div class="col-md-3">
-                <?php echo $this->commonForm->renderField('RefDateFrom'); //, $this->commonForm->getInput('RefDateFrom'); ?>	
+                <?php echo $this->commonForm->renderField('HealthUnitId'); ?>
             </div>
             <div class="col-md-3">
-                <?php echo $this->commonForm->renderField('RefDateTo'); //, $this->commonForm->getInput('RefDateTo'); ?>
+                <?php echo $this->commonForm->renderField('RefDateFrom'); ?>	
+            </div>
+            <div class="col-md-3">
+                <?php echo $this->commonForm->renderField('RefDateTo'); ?>
             </div>
             <div class="col-md-4 buttons">
                 <button class="btn btn-primary" id="btProlepsis2129ListSearch"><?php echo Text::_('COM_EL_SEARCH'); ?></button>

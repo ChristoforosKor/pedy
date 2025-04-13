@@ -16,6 +16,9 @@ use Joomla\CMS\Language\Text;
 class Prolepsis2129ListData extends JModelDatabase {   
     public function getState(): Registry {
         
+        $userHU = ComUtils::getUserHealthUnits();
+        $userHUIds = array_column($userHU, 'HealthUnitId');
+        if (count($userHUIds) === 0 ) return new  Registry( ['res' => [], 'total' => 0] );
         $state = parent::getState();
         $db = ComUtils::getPedyDB();
         $query = $db -> getQuery(true);
@@ -23,18 +26,25 @@ class Prolepsis2129ListData extends JModelDatabase {
         $query -> select(  'p.*'  ) 
         -> from ( 'Prolepsis2129 p' )  
         -> order( $state -> get('filter_order', 'RefDate') . ' ' . $state -> get('filter_order_Dir', 'asc') ) ;
-        $where = $this->makeWhereClause($state, $db);
+        $where = $this->makeWhereClause($state, $db, $userHUIds);
         if ($where !== '') {
             $query->where($where);
         }
         return new Registry( FrmBsTable::getData($db, $query, $state -> get('limit_start'), $state -> get('limit') ) );
     }
     
-    private function makeWhereClause ($state, $db) 
+    private function makeWhereClause ($state, $db, $userHUIds) 
     {   
-        $where = '';
-        $and = '';
-//        $exam_center_id = $state->get('exam_center_id', 0);
+        
+        $healthunit_id = $state->get('healthunit_id', 0);
+        if ($healthunit_id === 0 ) {
+            $where = ' p.healthunit_id in (' . implode(',', $userHUIds ) . ') '  ;
+        }
+        else {
+            $where = ' p.healthunit_id  = ' . $db->quote($healthunit_id);
+        }
+//        $where = ' p.healthunit_id in (' . implode(',', $userHUIds ) . ') ';
+        $and = ' and ';
         $RefDateFrom = $state->get('RefDateFrom', '');
         $RefDateTo = $state->get('RefDateTo', '');
         

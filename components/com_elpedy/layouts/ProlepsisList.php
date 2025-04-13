@@ -24,14 +24,19 @@ use Joomla\CMS\Language\Text;
     <div id="prolepsisListToolbar">
         <div class="row" role="form">
             <div class="col-md-3">
-                <?php echo $this->commonForm->renderField('exam_center_id'); //, $this->commonForm->getInput('exam_center_id'); ?>
+                <?php echo $this->commonForm->renderField('HealthUnitId'); ?>
             </div>
             <div class="col-md-3">
-                <?php echo $this->commonForm->renderField('RefDateFrom'); //, $this->commonForm->getInput('RefDateFrom'); ?>	
+                <?php echo $this->commonForm->renderField('exam_center_id'); ?>
             </div>
             <div class="col-md-3">
-                <?php echo $this->commonForm->renderField('RefDateTo'); //, $this->commonForm->getInput('RefDateTo'); ?>
+                <?php echo $this->commonForm->renderField('RefDateFrom'); ?>	
             </div>
+            <div class="col-md-3">
+                <?php echo $this->commonForm->renderField('RefDateTo'); ?>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-3 buttons">
                 <button class="btn btn-primary" id="btProlepsisListSearch"><?php echo Text::_('COM_EL_SEARCH'); ?></button>
                 <a class="btn btn-success" href="<?php echo $this->prolepsisEditUrl; ?>"><?php echo JText::_('COM_EL_NEW'); ?></a>

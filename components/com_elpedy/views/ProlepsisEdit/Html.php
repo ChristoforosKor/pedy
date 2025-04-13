@@ -22,7 +22,7 @@ class Html extends View {
         
         $state = $this->state;
         $this->formProlepsis = $state->get('forms')['prolepsis'];
-        
+       
         $endPoints = array_merge(
                 $this -> getJsonUrls()
                 , $this -> getHTMLUrls()

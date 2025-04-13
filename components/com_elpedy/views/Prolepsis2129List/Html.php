@@ -28,6 +28,8 @@ class Html extends View {
                 );
         Factory::getDocument()->addScriptOptions('com_elpedy', $endPoints);
         $this -> commonForm =Form::getInstance('common', 'common');
+        $healthUnitField = $this->commonForm->getField('HealthUnitId');
+        $healthUnitField->addOption(Text::_('COM_EL_SELECT'), '');
         $this->prolepsisEditUrl = $endPoints['Prolepsis2129Edit'];
         
         

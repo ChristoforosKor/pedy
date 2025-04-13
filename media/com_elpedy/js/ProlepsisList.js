@@ -23,7 +23,7 @@ export function init(optionsIn) {
             params.filter_order_Dir = params.order;
             params.filter_order = params.sort;
             params.limit_start = params.offset;
-//            params.HealthUnitId = document.getElementById('HealthUnitId').value;
+            params.healthunit_id = document.getElementById('HealthUnitId').value;
             params.RefDateFrom = getRefDate(document.getElementById('RefDateFrom'));
             params.RefDateTo = getRefDate(document.getElementById('RefDateTo'));
             params.exam_center_id = document.getElementById('exam_center_id').value;
