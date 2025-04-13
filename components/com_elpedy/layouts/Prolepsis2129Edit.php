@@ -36,6 +36,11 @@ use Joomla\CMS\Language\Text;
                     <?php echo $this->formProlepsis->renderField('RefDate'); ?>
                 </div>
                 <div class="col-md-3">
+                    <?php echo $this->formProlepsis->renderField('healthunit_id'); ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
                     <?php echo $this->formProlepsis->renderField('samples_to_check'); ?>
                 </div>
                 <div class="col-md-3">

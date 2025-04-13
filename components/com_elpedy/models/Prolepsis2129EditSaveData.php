@@ -39,8 +39,6 @@ class Prolepsis2129EditSaveData extends JModelBase {
         }
         $tbProlepsis = Table::getInstance('Prolepsis2129');
         $data = $state -> toArray();
-        var_dump($data);
-        exit;
         $tbProlepsis -> bind(  $data );
       
         $tbProlepsis -> check();

@@ -19,7 +19,8 @@ const Prolepsis = (function () {
       
         prolepsis2129Elms = {
             RefDate: document.getElementById('RefDate'),
-            id: document.getElementById('id'),  
+            id: document.getElementById('id'),
+            healthunit_id: document.getElementById('healthunit_id'),
             samples_to_check: document.getElementById('samples_to_check'),
             result_ok: document.getElementById('result_ok'),
             result_notok: document.getElementById('result_notok'),
@@ -45,7 +46,7 @@ const Prolepsis = (function () {
            name:'act',
            value: action
         });
-        jQuery.post(options.saveUrl, frmValues, saveResponse);
+        jQuery.post(options.saveUrl, frmValues, saveResponse).fail(failResponse);
     };
 
     const saveResponse = (response) => {
@@ -65,6 +66,14 @@ const Prolepsis = (function () {
                 document.getElementById('id').value = response.data.id;
         }
         elgsJS.showAsReady('#prolepsis2129', '.prolepsis2129-edit .el-busy');
+    };
+    
+    const failResponse = (response) => {
+        elgsJS.renderAppMessages(response.responseJSON, 'HTMLBootstrap', {messageArea: document.querySelector('.prolepsis-edit .msg-area')});
+        elgsJS.showAsReady('#prolepsisHPV3065', '.prolepsis-edit .el-busy');
+        if (response.status === 401) {
+            setTimeout( () => { window.location.href ='/'; }, 2000);
+        } 
     };
 
     const getId = () => {
