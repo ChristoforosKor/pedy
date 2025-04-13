@@ -24,6 +24,7 @@ class JTableProlepsis extends JTablePedy {
     var $result_positive_hpv18 = null;
     var $result_positive_ascsus = null;
     var $result_positive_to_pap_negative = null;
+    var $healthunit_id = null;
     
   
     function __construct()

@@ -50,7 +50,7 @@ const Prolepsis = (function () {
            name:'act',
            value: action
         });
-        jQuery.post(options.saveUrl, frmValues, saveResponse);
+        jQuery.post(options.saveUrl, frmValues, saveResponse).fail(failResponse);
     };
 
     const saveResponse = (response) => {
@@ -70,6 +70,15 @@ const Prolepsis = (function () {
                 document.getElementById('id').value = response.data.id;
         }
         elgsJS.showAsReady('#prolepsisHPV3065', '.prolepsis-edit .el-busy');
+        
+    };
+
+    const failResponse = (response) => {
+        elgsJS.renderAppMessages(response.responseJSON, 'HTMLBootstrap', {messageArea: document.querySelector('.prolepsis-edit .msg-area')});
+        elgsJS.showAsReady('#prolepsisHPV3065', '.prolepsis-edit .el-busy');
+        if (response.status === 401) {
+            setTimeout( () => { window.location.href ='/'; }, 2000);
+        } 
     };
 
     const getId = () => {

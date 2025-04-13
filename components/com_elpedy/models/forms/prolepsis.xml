@@ -7,6 +7,12 @@
                 type="hidden"
                         
             />
+            
+            <field 
+                name="healthunit_id" 
+                type="hidden"
+                required="true"        
+            />
                     
             <field 
                 label="JDATE"
